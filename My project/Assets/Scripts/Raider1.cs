@@ -21,6 +21,7 @@ public class Raider1 : MonoBehaviour
     public int moveSpeed = 1;
     public int range = 1;
 
+    private Animator myAnimator;
 
     public void takeDamage(int damage)
     {
@@ -35,6 +36,8 @@ public class Raider1 : MonoBehaviour
     void Start()
     {
         currentState = raiderState.Walking;
+
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -54,6 +57,12 @@ public class Raider1 : MonoBehaviour
             case raiderState.Dead:
                 break;
         }
+
+        if(currentState == raiderState.Walking)
+        {
+            myAnimator.SetTrigger("DoAttack");
+        }
+        
     }
 
     void UpdateWalking()

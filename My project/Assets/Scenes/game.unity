@@ -489,9 +489,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968b1726a681bfa44aed8abf70d41d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  raiders1: {fileID: 0}
-  raiders2: {fileID: 0}
-  raiders3: {fileID: 0}
+  raiders1: {fileID: 3363238416442373353, guid: f7d6ec7cf8e653c4a905e3e14b76d65a, type: 3}
+  raiders2: {fileID: 3363238416442373353, guid: f7d6ec7cf8e653c4a905e3e14b76d65a, type: 3}
+  raiders3: {fileID: 3363238416442373353, guid: f7d6ec7cf8e653c4a905e3e14b76d65a, type: 3}
   soulCostRaiders1: 0
   soulCostRaiders2: 0
   soulCostRaiders3: 0
