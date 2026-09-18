@@ -16,11 +16,12 @@ public class Soldier1 : MonoBehaviour
     public soldierState currentState;
 
     public int health = 10;
-    public int damage = 1;
+    public int damage = 5;
     public int reloadTime = 1;
     public int reloadSpeed = 1;
     public int moveSpeed = 5;
     public int range = 1;
+
 
     public void takeDamage(int damage)
     {
@@ -59,8 +60,20 @@ public class Soldier1 : MonoBehaviour
     void UpdateWalking()
     {
 
-        // Move player at cnstant speed to the right
+        // Move player at constant speed to the right
         transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+    }
 
+    void UpdateAttacking()
+    {
+        
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            currentState = soldierState.Attacking;
+        }  
     }
 }
