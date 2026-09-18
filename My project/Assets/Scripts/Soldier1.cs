@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
+using System.Collections;
+
 
 public enum soldierState
 {
@@ -21,6 +23,7 @@ public class Soldier1 : MonoBehaviour
     public int reloadSpeed = 1;
     public int moveSpeed = 5;
     public int range = 1;
+    public bool damaging;
 
     // Timer variables
     public float timeRemaining = 3; // seconds
@@ -69,17 +72,9 @@ public class Soldier1 : MonoBehaviour
         transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
     }
 
-    void UpdateAttacking()
+    IEnumerator UpdateAttacking()
     {
-        Raider1 raider = GetComponent<Raider1>();
-        raider.takeDamage(damage);
-        raider.currentState = raiderState.Damaged;
-        timerIsRunning = true;
-        if (timeRemaining > 0)
-        {
-            raider.currentState = raiderState.Damaged;
-            timerIsRunning = true;
-        }
+        yield return new WaitForSeconds(5);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -87,6 +82,7 @@ public class Soldier1 : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             currentState = soldierState.Attacking;
+            other.GetComponent<Skeleton1>(health);
         }  
     }
 
@@ -97,4 +93,6 @@ public class Soldier1 : MonoBehaviour
             currentState = soldierState.Walking;
         }
     }
+
+
 }
