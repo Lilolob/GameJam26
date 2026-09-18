@@ -6,6 +6,11 @@ public class PlayerCon : MonoBehaviour
     public GameObject raiders1;
     public GameObject raiders2;
     public GameObject raiders3;
+
+    public int soulCostRaiders1;
+    public int soulCostRaiders2;
+    public int soulCostRaiders3;
+
     public int faction;
     public Vector2 spawnPoint;
     public int money;
@@ -30,13 +35,36 @@ public class PlayerCon : MonoBehaviour
         {
             if (Keyboard.current.qKey.wasPressedThisFrame)
             {
-                if (souls > 10)
+                if (souls >= soulCostRaiders1)
                 {
                     Instantiate(raiders1, spawnPoint, transform.rotation);
-                    souls = souls - 10;
+                    souls = souls - soulCostRaiders1;
+                }
+            }
+            if (Keyboard.current.wKey.wasPressedThisFrame)
+            {
+                if (souls >= soulCostRaiders2)
+                {
+                    Instantiate(raiders2, spawnPoint, transform.rotation);
+                    souls = souls - soulCostRaiders2;
+                }
+            }
+            if (Keyboard.current.qKey.wasPressedThisFrame)
+            {
+                if (souls >= soulCostRaiders3)
+                {
+                    Instantiate(raiders1, spawnPoint, transform.rotation);
+                    souls = souls - soulCostRaiders3;
                 }
             }
         }
 
+    }
+
+    void SpawnRaider()
+    {
+        {
+
+        }
     }
 }
