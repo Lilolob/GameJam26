@@ -1,6 +1,6 @@
-using UnityEngine;
 using System.Collections;
-
+using UnityEngine;
+using UnityEngine.InputSystem;
 using static UnityEngine.Audio.ControlContext;
 
 
@@ -12,6 +12,8 @@ public class SkeletonSpawner : MonoBehaviour
     public GameObject Skeleton2;
     public GameObject Skeleton3;
     private int x;
+    public int souls;
+    public int soulcost;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,25 +25,15 @@ public class SkeletonSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawns();
+        if (Keyboard.current.pKey.wasPressedThisFrame)
+        {
+            if (souls >= soulcost)
+            {
+                Instantiate(Skeleton3, spawnPoint, transform.rotation);
+                souls = souls - soulcost;
+            }
+            
+        }
     }
-    IEnumerator spawns()
-    {
-        yield return new WaitForSeconds(5);
-        x = Random.Range(0, 9);
-        if (x > 4)
-        {
-            Instantiate(Skeleton1, spawnPoint, transform.rotation);
-        }
-        if (x > 6)
-        {
-            Instantiate(Skeleton2, spawnPoint, transform.rotation);
-        }
-        else
-        {
-            Instantiate(Skeleton3, spawnPoint, transform.rotation);
 
-        }
-
-    }
 }

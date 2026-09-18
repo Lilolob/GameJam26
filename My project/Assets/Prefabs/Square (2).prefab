@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8387188899674034230}
   m_Layer: 0
   m_Name: Square (2)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,6 +113,8 @@ MonoBehaviour:
   reloadSpeed: 1
   moveSpeed: 5
   range: 1
+  damaging: 0
+  isenemy: 0
   timeRemaining: 3
   timerIsRunning: 0
 --- !u!61 &6213187778174580523
@@ -187,4 +189,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 5

@@ -24,6 +24,7 @@ public class Soldier1 : MonoBehaviour
     public int moveSpeed = 5;
     public int range = 1;
     public bool damaging;
+    public bool isenemy;
 
     // Timer variables
     public float timeRemaining = 3; // seconds
@@ -68,8 +69,16 @@ public class Soldier1 : MonoBehaviour
 
     void UpdateWalking()
     {
-        // Move soldier at constant speed to the right
-        transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        if (isenemy ==  true)
+        {
+            // Move soldier at constant speed to the right
+            transform.Translate(Vector3.left * moveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        }
+
     }
 
     IEnumerator UpdateAttacking()
@@ -79,10 +88,10 @@ public class Soldier1 : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") || other.CompareTag("Player")) 
         {
             currentState = soldierState.Attacking;
-            other.GetComponent<Skeleton1>(health);
+            Destroy(other);
         }  
     }
 
