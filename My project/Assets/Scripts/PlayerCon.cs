@@ -3,10 +3,11 @@ using UnityEngine.InputSystem;
 public class PlayerCon : MonoBehaviour
 {
 
-    public GameObject Solider1;
-
-    public GameObject SpawnPoint;
-    private Vector2 SpawnPoints;
+    public GameObject raiders1;
+    public GameObject raiders2;
+    public GameObject raiders3;
+    public int faction;
+    public Vector2 spawnPoint;
     public int money;
     public int souls;
 
@@ -19,10 +20,23 @@ public class PlayerCon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.qKey.wasPressedThisFrame)
+        if (Keyboard.current.tKey.wasPressedThisFrame)
         {
-            if(souls > 5)
-                Instantiate(Solider1, SpawnPoints, transform.rotation);
+            souls++;
         }
+
+
+        if (faction  == 1)
+        {
+            if (Keyboard.current.qKey.wasPressedThisFrame)
+            {
+                if (souls > 10)
+                {
+                    Instantiate(raiders1, spawnPoint, transform.rotation);
+                    souls = souls - 10;
+                }
+            }
+        }
+
     }
 }
