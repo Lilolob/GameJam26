@@ -22,13 +22,18 @@ public class Soldier1 : MonoBehaviour
     public int moveSpeed = 5;
     public int range = 1;
 
+    // Timer variables
+    public float timeRemaining = 3; // seconds
+    public bool timerIsRunning = false;
+
+
 
     public void takeDamage(int damage)
     {
         health -= damage;
         if (health <= 0)
         {
-            // death
+            currentState = soldierState.Dead;
         }
     }
 
@@ -49,6 +54,7 @@ public class Soldier1 : MonoBehaviour
                 UpdateWalking();
                 break;
             case soldierState.Attacking:
+                UpdateAttacking();
                 break;
             case soldierState.Damaged:
                 break;
@@ -59,14 +65,21 @@ public class Soldier1 : MonoBehaviour
 
     void UpdateWalking()
     {
-
-        // Move player at constant speed to the right
+        // Move soldier at constant speed to the right
         transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
     }
 
     void UpdateAttacking()
     {
-        
+        Raider1 raider = GetComponent<Raider1>();
+        raider.takeDamage(damage);
+        raider.currentState = raiderState.Damaged;
+        timerIsRunning = true;
+        if (timeRemaining > 0)
+        {
+            raider.currentState = raiderState.Damaged;
+            timerIsRunning = true;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -75,5 +88,13 @@ public class Soldier1 : MonoBehaviour
         {
             currentState = soldierState.Attacking;
         }  
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            currentState = soldierState.Walking;
+        }
     }
 }
