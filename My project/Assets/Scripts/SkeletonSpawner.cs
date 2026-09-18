@@ -1,11 +1,18 @@
 using UnityEngine;
+using System.Collections;
+
+using static UnityEngine.Audio.ControlContext;
+
 
 public class SkeletonSpawner : MonoBehaviour
 {
-    public int health;
-    public int spawn_rate;
-    public Skeleton1 Skeleton_1;
-    public Rigidbody2D RigBod;
+    public Vector2 spawnPoint;
+
+    public GameObject Skeleton1;
+    public GameObject Skeleton2;
+    public GameObject Skeleton3;
+    private int x;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,9 +23,25 @@ public class SkeletonSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("Space"))
+        spawns();
+    }
+    IEnumerator spawns()
+    {
+        yield return new WaitForSeconds(5);
+        x = Random.Range(0, 9);
+        if (x > 4)
         {
-            Skeleton1 Skeleton_1 = Skeleton1.Instantiate(this.Skeleton_1);
+            Instantiate(Skeleton1, spawnPoint, transform.rotation);
         }
+        if (x > 6)
+        {
+            Instantiate(Skeleton2, spawnPoint, transform.rotation);
+        }
+        else
+        {
+            Instantiate(Skeleton3, spawnPoint, transform.rotation);
+
+        }
+
     }
 }
